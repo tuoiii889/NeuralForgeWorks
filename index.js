@@ -1,17 +1,15 @@
-function countAndSay(n) {
-  let result = "1";
-  for (let i = 1; i < n; i++) {
-    let temp = "";
-    let count = 1;
-    for (let j = 0; j < result.length; j++) {
-      if (result[j] === result[j + 1]) {
-        count++;
-      } else {
-        temp += count + result[j];
-        count = 1;
-      }
-    }
-    result = temp;
+function minMeetingRoomsII(intervals) {
+  const startTimes = intervals
+    .map((interval) => interval[0])
+    .sort((a, b) => a - b);
+  const endTimes = intervals
+    .map((interval) => interval[1])
+    .sort((a, b) => a - b);
+  let rooms = 0;
+  let endIdx = 0;
+  for (let i = 0; i < startTimes.length; i++) {
+    if (startTimes[i] < endTimes[endIdx]) rooms++;
+    else endIdx++;
   }
-  return result;
+  return rooms;
 }
