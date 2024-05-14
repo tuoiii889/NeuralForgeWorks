@@ -1,7 +1,7 @@
-const groupBy = (arr, func) =>
-  arr
-    .map(typeof func === "function" ? func : (val) => val[func])
-    .reduce((acc, val, i) => {
-      acc[val] = (acc[val] || []).concat(arr[i]);
-      return acc;
-    }, {});
+function pathSum(root, sum) {
+  if (!root) return false;
+  if (!root.left && !root.right && root.val === sum) return true;
+  return (
+    pathSum(root.left, sum - root.val) || pathSum(root.right, sum - root.val)
+  );
+}
